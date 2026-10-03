@@ -1,0 +1,55 @@
+{
+  "inputs": {
+    "target_thrust_N": 3000.0,
+    "chamber_pressure_Pa": 2000000.0,
+    "ambient_pressure_Pa": 101325.0,
+    "assumed_Isp_s": 290.0,
+    "gamma": 1.2,
+    "c_star_m_s": 1750.0,
+    "OF_ratio": 2.5
+  },
+  "mass_flows": {
+    "mdot_total_kg_s": 1.0548788410116499,
+    "mdot_oxidizer_kg_s": 0.7534848864368928,
+    "mdot_fuel_kg_s": 0.3013939545747571,
+    "exhaust_velocity_m_s": 2843.9285
+  },
+  "injector_design": {
+    "injector_dP_Pa": 350000.0,
+    "ox_total_orifice_area_m2": 3.808769259816828e-05,
+    "fuel_total_orifice_area_m2": 1.8081937652224607e-05,
+    "orifice_diameter_m": 0.001,
+    "n_ox_holes": 49,
+    "n_fuel_holes": 24
+  },
+  "nozzle_design": {
+    "throat_area_m2": 0.0009230189858851936,
+    "throat_radius_m": 0.01714077210462218,
+    "throat_diameter_mm": 34.28154420924436,
+    "exit_mach": 2.537594313774433,
+    "area_ratio_exit_to_throat": 3.591605603570735,
+    "exit_area_m2": 0.003315120161907439,
+    "exit_radius_m": 0.032484388887931176,
+    "exit_diameter_mm": 64.96877777586235
+  },
+  "chamber_geometry_check": {
+    "chamber_diameter_m": 0.055,
+    "straight_length_m": 0.09,
+    "convergent_length_m": 0.017942709041979192,
+    "chamber_volume_m3": 0.00024241160102354869,
+    "L_star_m": 0.26262905176438067,
+    "L_star_typical_range_m": [
+      0.8,
+      1.5
+    ],
+    "L_star_within_typical_range": false,
+    "contraction_ratio_Ac_At": 2.5739767877025987,
+    "note": "L* below typical range indicates the as-modeled chamber is SHORTER than standard LOX/Kerosene practice would suggest \u2014 insufficient residence time for complete combustion in a real engine. Documented as a known limitation of this educational baseline; does not affect the validity of the DfAM part-count and single-piece consolidation comparison, which is geometry-independent of chamber length."
+  },
+  "thermal_estimate": {
+    "adiabatic_wall_temp_K": 3200.0,
+    "target_wall_temp_K": 800.0,
+    "estimated_heat_flux_W_per_m2": 19200000.0,
+    "note": "First-order estimate only; validate against SimScale thermal sim."
+  }
+}

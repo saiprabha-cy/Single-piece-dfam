@@ -1,0 +1,26 @@
+Drill report for sensor_board.kicad_pcb
+Created on 2026-10-03T22:39:35
+
+Copper Layer Stackup:
+    =============================================================
+    L1 :  F.Cu                      front
+    L2 :  B.Cu                      back
+
+
+Drill file 'sensor_board-PTH-drl.gbr' contains
+    plated through holes:
+    =============================================================
+    T1  0.200mm  0.0079"  (12 holes))
+    T2  0.300mm  0.0118"  (20 holes))
+    T3  1.000mm  0.0394"  (11 holes))
+    T4  1.400mm  0.0551"  (2 holes))
+
+    Total plated holes count 45
+
+
+Drill file 'sensor_board-NPTH-drl.gbr' contains
+    unplated through holes:
+    =============================================================
+    T1  2.100mm  0.0827"  (4 holes))
+
+    Total unplated holes count 4
