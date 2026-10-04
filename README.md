@@ -17,26 +17,35 @@ the redesign with both hand calculations and simulation.
 
 ## Project Stages
 
-| Stage | Folder | Description |
+| Stage | Folder | Status |
 |---|---|---|
-| 1 | `01_calculations/` | Python propulsion calculations → design targets (thrust, mass flow, injector orifice sizing, nozzle geometry, first-order thermal estimate) |
-| 2 | `02_cad/baseline_multipart/` | Traditional multi-part CAD model (Fusion 360) |
-| 3 | `02_cad/dfam_redesign/` | Single-piece, DfAM-optimized redesign (Fusion 360) |
-| 4 | `03_simulation/` | Structural/thermal validation (SimScale) vs. hand calculations |
-| 5 | `04_kicad_board/` | Sensor/telemetry board design (KiCad) for instrumenting the part in a test setup |
-| 6 | `05_print_readiness/` | Slicer-based printability analysis (PrusaSlicer/Cura) |
-| 7 | `06_report/` | Final case-study report and portfolio write-up |
+| 1. Propulsion calculations | `01_calculations/` | ✅ Complete |
+| 2. Baseline multi-part CAD | `02_cad/baseline_multipart/` | ✅ Complete |
+| 3. Single-piece DfAM redesign | `02_cad/dfam_redesign/` | ✅ Complete |
+| 4. Structural/thermal validation | `03_simulation/` | ✅ Structural complete; thermal documented as a known limitation |
+| 5. Sensor/telemetry board | `04_kicad_board/` | ✅ Complete (0 DRC errors) |
+| 6. Print-readiness analysis | `05_print_readiness/` | 🔜 Scoped as future work (see below) |
+| 7. Final report | `06_report/` | ✅ Complete |
 
 ## Design Case (Assumed, Representative Values)
 
-This project uses **representative small-engine values** for a generic
-LOX/Kerosene test-case engine, not any specific company's proprietary
-specifications. This is explicitly noted here and in the final report.
+This project uses **representative values** for a generic small LOX/Kerosene
+test-case engine, not any specific company's proprietary specifications.
 
 - Target thrust: 3,000 N
 - Chamber pressure: 20 bar
 - Propellants: LOX / Kerosene (RP-1)
 - Assumed sea-level Isp: 290 s
+
+## Key Results
+
+| Metric | Baseline (multi-part) | Redesign (single-piece) |
+|---|---|---|
+| Part count | 3 | 1 |
+| Fastener interfaces | 2 (1 bolted, 1 rigid-joint only) | 0 |
+| Mounting holes | 8 | 0 |
+| Cooling provisions | None | 6 integrated channels |
+| Structural safety factor (20 bar) | — | 6.24 (Ti-6Al-4V, SimScale) |
 
 ## Tools Used
 
@@ -44,11 +53,31 @@ specifications. This is explicitly noted here and in the final report.
 - **Autodesk Fusion 360** (Personal Use license) — CAD modeling + built-in simulation
 - **SimScale** — structural/thermal validation
 - **KiCad** — sensor/telemetry PCB design
-- **PrusaSlicer / Cura** — print-readiness analysis
 
-## Status
+### Future Extensions
+- **PrusaSlicer / Cura** — print-readiness and support-structure analysis
+  (scoped as future work; see `05_print_readiness/`)
+- Coolant inlet/outlet port routing on the DfAM redesign
+- Full channel count (6 → 24) for production-representative coverage
+- Chamber L* correction (increase straight-section length for realistic
+  combustion residence time)
 
-🚧 In progress — Stages 1-4 complete (calculations, baseline CAD, single-piece
-redesign, structural validation). Thermal simulation attempted; documented
-as a known limitation due to solver divergence and free-tier compute limits
-(see `03_simulation/validation_comparison.md`).
+## Known Limitations
+
+- **Chamber L\*** (characteristic length) is 263mm against a typical
+  800-1500mm range for LOX/Kerosene engines — the as-modeled chamber is
+  shorter than standard practice would recommend. This is a known,
+  documented simplification; it does not affect the validity of the
+  single-piece consolidation comparison, which is geometry-independent of
+  chamber length. See `01_calculations/results/design_targets.json`.
+- **Thermal simulation** was attempted in SimScale but diverged (likely due
+  to an incomplete fluid-flow boundary definition in the initial CHT setup).
+  Due to free-tier compute limits, a corrected re-run was not completed.
+  The Stage 1 hand-calculated estimate (19.2 MW/m², target wall temp 800K)
+  is retained as the primary thermal reference. See
+  `03_simulation/validation_comparison.md`.
+- **Cooling channel count** was reduced from a production-representative
+  24 channels to 6, to keep the modeling scope achievable within the
+  project timeline.
+- **Print-readiness analysis** (slicer-based orientation/support check) was
+  not completed; see Future Extensions above.
